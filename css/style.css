@@ -1,0 +1,509 @@
+*,
+*::before
+*::after{
+	box-sizing: border-box;
+}
+
+/*custom properties to update*/
+/*root to set up some custom properties and to declare variables*/
+:root{
+	--ff-primary: 'Lora', sans-serif;/*ff=fontfamily*/
+	--ff-secondary: 'Roboto Slab', serif;
+
+	--fw-reg: 400; /*fw=fontweight*/
+	--fw-bold: 700;
+
+	--clr-light : #fff;/*clr-light=colorbackground*/
+	--clr-dark : #303030;/*clr-dark=text*/
+	--clr-accent : #16e0bd;
+
+	--fs-h1 : 3rem;/*fs=fontsize*/
+	--fs-h2 : 2.25rem;
+	--fs-h3 : 1.25rem;
+	--fs-body : 1rem;
+
+	--bs: 0.25em 0.25em 0.75em rgba(0,0,0,.25),
+			0.125em 0.125em 0.25em rgba(0,0,0,.15);
+}
+
+
+/*headline changes with changing the screen*/
+@media (min-width:800px){
+	:root{
+		--fs-h1: 4.5rem;
+		--fs-h2: 3.75rem;
+		--fs-h3: 1.5rem;
+		--fs-body: 1.125rem;
+	}
+}
+
+
+
+
+
+
+
+
+
+/*General styles*/
+
+html{
+	scroll-behavior: smooth;
+}
+
+body{
+	background: var(--clr-light);
+	color: var(--clr-dark);
+	margin: 0;
+	font-family: var(--ff-primary);
+	font-size: var(--ff-body);
+	line-height: 1.6 
+}
+
+section{
+	padding: 5em 2em;
+}
+
+img{
+	display: block;
+	max-width: 100%;
+}
+
+
+strong{ font-weight: var(--fw-bold) }
+
+/*when someone clicks on tab "focus"*/
+:focus{
+	outline: 3px solid var(--clr-accent);
+	outline-offset: 3px;  
+}
+
+/*Buttons*/
+.btn{
+	display: inline-block;
+	padding: .5em 2.5em;
+	background: var(--clr-accent);
+	color: var(--clr-dark);/*text color*/
+	text-decoration: none;
+	cursor: pointer;/*imp:pointer on button*/
+	font-size: .8rem;
+	text-transform: uppercase;/*cases*/
+	letter-spacing: 2px;
+	font-weight: var(--fw-bold);
+	transition: transform 200ms ease-in-out;/*hover effect*/
+}
+
+.btn:hover{
+	transform: scale(1.1);/*enlarges the button*/
+}
+
+
+
+/*Typography*/
+h1,
+h2,
+h3{
+	line-height: 1.1; /*gap between lines*/
+	margin: 0;
+}
+
+h1{ font-size: var(--fs-h1) }
+h2{ font-size: var(--fs-h2) }
+h3{ font-size: var(--fs-h3) }
+
+
+.section__title{
+	margin-bottom: .25em;
+}
+
+
+.section__title--intro{
+	font-weight: var(--fw-reg);
+}
+
+.section__title--intro strong{
+	display: block;
+}
+
+.section__subtitle{
+	margin: 0;
+	font-size: var(--fs-h3);
+}
+
+
+.section__subtitle--intro,
+.section__subtitle--about{
+	background: var(--clr-accent);
+	padding: .25em .25em;
+	font-family: var(--ff-secondary);
+	margin-bottom: 1em; /*putting a margin on photo*/
+}
+
+.section__subtitle--work{
+	color: var(--clr-accent);
+	font-weight: var(--fw-bold);
+	margin-bottom: 2em;
+}
+
+
+
+
+
+
+
+
+
+
+
+/*header*/
+
+header{
+	display: flex;
+	justify-content: space-between;
+	padding: 1em;
+}
+
+
+/*.logo{
+	max-width: 100px;
+
+}*/
+
+.nav {/*works on nav bar(HOME,SERVICES,ABOUT,WORK)*/
+	position: fixed;
+	background: var(--clr-dark);
+	color: var(--clr-light);/*text color light*/
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	z-index: 100;
+
+	transform: translateX(100%);/*p% to change the size of nav bar*/
+	transition: transform 250ms cubic-bezier(.5,0,.5,1);
+}
+
+.nav__list{
+	list-style: none;
+	display: flex;
+	height: 100%;
+	flex-direction: column;
+	justify-content: space-evenly;
+	align-items: center;
+	margin: 0;
+	padding: 0; 
+}
+
+.nav__link{
+	color: inherit;
+	font-weight: var(--fw-bold);
+	font-size: var(--fs-h2);
+	text-decoration: none;
+}
+
+.nav__link:hover{
+	color: var(--clr-accent);
+}
+
+.nav-toggle{/*space near nav bar*/
+	padding: .5em;
+	background: transparent;
+	border: 0;
+	cursor: pointer;
+	position: absolute;
+	right: 1em;
+	top: 1em;
+	z-index: 1000;
+}
+
+.nav-open .nav{/*when we click on nav bar ,it shows all option menu*/
+	transform: translateX(0);
+}
+
+.nav-open .nav-toggle{
+	position: fixed;
+}
+
+.nav-open .hamburger{
+	transform: rotate(.625turn);
+}
+
+.nav-open .hamburger::before{
+	transform: rotate(90deg) translateX(-6px);
+}
+
+.nav-open .hamburger::after{
+	opacity: 0;
+}
+
+.hamburger{
+	display: block;
+	position: relative;
+}
+
+.hamburger,
+.hamburger::before,
+.hamburger::after{
+	background: var(--clr-accent);
+	width: 2em;
+	height: 3px;
+	border-radius: 1em;
+	transition: transform 250ms ease-in-out;
+}
+
+.hamburger::before,
+.hamburger::after{
+	content: '';
+	position: absolute;
+	left: 0;
+	right: 0;
+}
+
+.hamburger::before{top: 6px;}
+.hamburger::after{bottom: 6px;}
+
+
+
+
+
+
+
+/*Intro Section*/
+.intro{
+	position: relative;
+}
+
+
+/*Image Shadow*/
+.intro__img{
+	box-shadow: var(--bs);
+}
+
+
+.section__subbtitle--intro{
+	display: inline-block;
+}
+
+
+/*changes the  text and photos like putting grid on it*/
+/*Intro section css*/
+@media (min-width: 600px){
+	.intro{
+		display: grid;
+		width: min-content;
+		margin: 0 auto;
+		grid-column-gap: 1em;
+		grid-template-areas: 
+			"img title"
+			"img subtitle";
+		grid-template-columns: min-content max-content;
+	}
+
+	.intro__img{
+		grid-area: img;
+		min-width: 250px;
+		position: relative;
+		z-index: 2; /*to bring image above the line*/
+	}
+
+	.section__subtitle--intro{
+		align-self: start;/*for front-end dev box */
+		grid-column: -1/1;
+		grid-row: 2;
+		text-align: right;/*move frontend dev to right*/
+		position: relative;
+		left: -1.5em;
+		width: calc(100% + 1.5em);
+	}
+}
+
+
+/* My service section*/
+.my-services{
+	background-color: var(--clr-dark);/*light/accent*/
+	background-image: url(../img/services-bg.jpg);/*service background image*/
+	background-size: cover;/*prevent repeating itself*/
+	background-blend-mode: lighten;/*to blend the color,not necessary*/
+	color: var(--clr-light);
+	text-align: center;
+}
+
+.section__title--services{
+	color: var(--clr-accent);
+	position: relative;
+}
+
+/*line under What I do*/
+.section__title--services::after{
+	content: '';
+	display: block;
+	width: 2em;
+	height : 1px;
+	margin: 0.5em auto 1em;
+	background: var(--clr-light); /*we can also put 'current' color*/
+	opacity: 0.5;
+}
+
+.services{
+	margin-bottom: 4em;
+}
+
+/*Multiple column*/
+@media (min-width: 800px){/*resizing the browser*/
+	.services{
+		display: flex;
+		max-width: 1000px;
+		margin-left: auto;/*to not overwrite the space from margin bottom*/
+		margin-right: auto; 
+	}
+
+	.service+ .service{/*marginal space between the column text*/
+		margin-left: 2em;
+	}
+}
+
+
+/*About me*/
+.about-me{
+	max-width: 1000px;
+	margin: 0 auto;
+}
+
+.about-me__img{/*shadow under the image*/
+	box-shadow: var(--bs);
+}
+
+@media (min-width: 600px){/*acc to the part we need*/
+	.about-me{
+		display: grid;
+		grid-template-columns: 1fr 200px;
+		grid-template-areas: /*to overlap the settings */
+				"title img"
+				"subtitle img" 
+				"text img";
+		grid-column-gap: 2em;
+	}
+
+	.section__title--about {
+		grid-area: title; 
+	}
+
+	.section__subtitle--about{
+		grid-column: 1/-1;
+		grid-row: 2;
+		position: relative;
+		left: -2em;
+		width: calc(100% - 10em);
+		padding-left: 1em;/*cant be seen,but text cannot touch the image*/
+		padding-right: calc(200px + 4em);
+	}
+
+	.about-me__img{
+		grid-area: img;
+		position: realtive;/*to amke image on top of the line*/
+		z-index: 2;
+	}
+}
+
+
+
+/*My work*/
+.my-work{
+	background-color: var(--clr-dark);
+	color: var(--clr-light);
+	text-align: center;
+}
+
+.portfolio {
+	display: grid;
+	grid-template-columns: repeat(auto-fit,minmax(300px, 1fr));
+}
+
+.portfolio__item{
+	background: var(--clr-accent);
+	overflow: hidden;/*img zooms inside that box*/
+}
+
+.portfolio__img{
+	transition: 
+		transform 750ms cubic-bezier(.5,0,.5,1),
+		opacity 250ms linear;
+}
+
+.portfolio__item:focus{
+	position: relative;
+	z-index: 2;
+}
+
+
+.portfolio__img:hover,	/*Hovering on image*/
+.portfolio__item:focus .portfolio__img{/*Using tab button to focus*/
+	transform: scale(1.2);
+	opacity: .5;
+}
+
+
+
+/*Footer*/
+
+.footer{
+	background: #111;
+	color: var(--clr-accent);
+	text-align: center;
+	padding: 2.5em 0;
+	font-size: var(--fs-h3);
+}
+
+.footer a{
+	color: inherit;
+	text-decoration: none;
+}
+
+.footer__link{
+	font-weight: var(--fw-bold);
+}
+
+.footer__link:hover,
+.social-list__link:hover{
+	opacity: .7;
+}
+
+.footer__link:hover{
+	text-decoration: underline;
+}
+
+/*putting the logos in line*/
+.social-list{
+	list-style: none;
+	display: flex;
+	justify-content: center;
+	margin: 2em 0 0;
+	padding: 0;
+}
+
+/*giving space in between logos*/
+.social-list__item{
+	margin: 0 .5em;
+}
+
+.social-list__link{
+	padding: .5em;
+}
+
+
+
+
+
+
+
+/*Individual portfolio item styles*/
+.portfolio-item-individual{
+	padding: 0 2em 2em;
+	max-width: 1000px;
+	margin: 0 auto;
+}
+.portfolio-item-individual p{
+	max-width: 600px;
+	margin-left: auto;
+	margin-right: auto;
+}
